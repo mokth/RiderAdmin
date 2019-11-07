@@ -1,0 +1,303 @@
+<div class="container">
+   <!--tool bar -->
+  <mat-toolbar color="primary">
+    <i class="material-icons">motorcycle</i>
+    <span>&nbsp;&nbsp;Rider Registration / Pendaftaran Rider</span>
+    <span class="fill-remaining-space"></span>
+    <span> <button mat-button><span class="material-icons">insert_emoticon</span> FAQ</button> </span>
+  </mat-toolbar>
+  <!--tool bar -->
+
+  <form [formGroup]="profileForm">
+    <!-- Personal data -->
+    <mat-accordion>
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <i class="material-icons">portrait</i>&nbsp;&nbsp;Personal data / Data Peribadi
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="row">
+          <div class="col-md-6 col-xs-12">
+            <mat-form-field>
+              <input formControlName="name" required="true" matInput placeholder="Full Name / Name Penuh">
+            </mat-form-field>
+          </div>
+          <div class="col-md-6 col-xs-12">
+            <mat-form-field>
+              <input formControlName="nickname" required="true" matInput placeholder="Nick Name / Nama samaran">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-xs-12">
+            <mat-form-field>
+              <mat-label>Nationality / Warga negara</mat-label>
+              <mat-select formControlName="nationality" (selectionChange)="onNationalityChange()" required="true">
+                <mat-option value="Malaysia">
+                  Malaysian
+                </mat-option>
+                <mat-option value="Other">
+                  Other / Bukan Malaysia
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6 col-xs-12">
+            <mat-form-field>
+              <input *ngIf="isLocal" formControlName="icno" required="true" matInput mask='000000-00-0000'
+                placeholder="NRIC / IC No / Passport No">
+              <input *ngIf="!isLocal" formControlName="icno" required="true" matInput placeholder="Passport No">
+            </mat-form-field>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-xs-12">
+            <mat-form-field>
+              <input formControlName="dob" required="true" id="dob" matInput [matDatepicker]="picker"
+                placeholder="DOB / Tarikh Lahir">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6 col-xs-12">
+            <mat-form-field>
+              <mat-label>Gender / Jantina</mat-label>
+              <mat-select formControlName="gender" required="true">
+                <mat-option value="Male">
+                  Male / Lelaki
+                </mat-option>
+                <mat-option value="Female">
+                  Female / Perempuan
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+     <!-- Personal data -->
+    <mat-divider></mat-divider>
+     <!-- Contact  -->
+    <mat-accordion>
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <i class="material-icons">contact_phone</i>&nbsp;&nbsp;Contact / Hubungan
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="row">
+          <div class="col-md-6 col-xs-12">
+            <mat-form-field>
+              <mat-label>Mobile No1 / Telefon Bimbit1</mat-label>
+              <!-- <input formControlName="mobil1" required="true" matInput placeholder="Mobile No1 / Telefon Bimbit1"> -->
+              <ngx-mat-intl-tel-input [onlyCountries]="['my']" 
+                [enablePlaceholder]="true" name="phone" required="true" formControlName="mobil1" #phone>
+              </ngx-mat-intl-tel-input>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6 col-xs-12">
+            <mat-form-field>
+              <mat-label> Mobile (Whatsapp) / Whatsapp No</mat-label>
+              <!-- <input formControlName="mobil1" required="true" matInput placeholder="Mobile No1 / Telefon Bimbit1"> -->
+              <ngx-mat-intl-tel-input [onlyCountries]="['my']" 
+                [enablePlaceholder]="true" name="phone" formControlName="mobil2" #phone>
+              </ngx-mat-intl-tel-input>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-xs-12">
+            <mat-form-field>
+              <mat-label>Emergency Contact / Talian Kecemasan</mat-label>
+              <!-- <input formControlName="mobil1" required="true" matInput placeholder="Mobile No1 / Telefon Bimbit1"> -->
+              <ngx-mat-intl-tel-input [onlyCountries]="['my']" 
+                [enablePlaceholder]="true" required="true" name="phone" formControlName="emergency" #phone>
+              </ngx-mat-intl-tel-input>
+
+            </mat-form-field>
+          </div>
+          <div class="col-md-6 col-xs-12">
+            <mat-form-field>
+              <input formControlName="contact" required="true" matInput placeholder="Contact Relationship / Hubungan">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-xs-12">
+              <mat-form-field>
+                <input formControlName="address" required="true" matInput placeholder="Address / Alamat">
+              </mat-form-field>
+           </div>         
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+     <!-- Contact  -->
+    <mat-divider></mat-divider>
+    <!-- Working Experience  -->
+    <mat-accordion>
+    <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <span class="material-icons">library_books</span>&nbsp;&nbsp;Working Experience / Pengalaman bekerja
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="row">
+          <div class="col-md-6 col-xs-12">
+            <mat-form-field>
+              <input formControlName="vehicle" required="true" matInput placeholder="Vehicle No / Nombor Kenderaan">
+            </mat-form-field>
+          </div>
+          <div class="col-md-6 col-xs-12">
+            <mat-form-field>
+              <input formControlName="driving" required="true" matInput
+                placeholder="Driving License No / No Lesen Memandu">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-xs-12">
+            <mat-form-field>
+              <input formControlName="working1" matInput placeholder="Experience 1 / Pengalaman 1">
+            </mat-form-field>
+          </div>
+          <div class="col-md-6 col-xs-12">
+            <mat-form-field>
+              <input formControlName="working2" matInput placeholder="Experience 2 / Pengalaman 2">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-xs-12">
+            <mat-form-field>
+              <input formControlName="stardate" required="true" id="dwork" matInput [matDatepicker]="picker2"
+                placeholder="Available Date / Tarikh Sedia Berkerja">
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6 col-xs-12">
+            <mat-form-field>
+              <input formControlName="remark" matInput placeholder="Remark / Catatan">
+            </mat-form-field>
+          </div>
+        </div>
+    </mat-expansion-panel>
+    </mat-accordion>
+    <!-- Working Experience  -->
+    <mat-divider></mat-divider>
+    <!-- Bank  -->
+    <mat-accordion>
+      <mat-expansion-panel [expanded]="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <span class="material-icons">library_books</span>&nbsp;&nbsp;Bank Info / Maklumat Bank 
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="row">
+            <div class="col-md-6 col-xs-12">
+              <mat-form-field>
+              <mat-label>Bank Name / Name Bank</mat-label>
+              <mat-select formControlName="bankName" >
+                <mat-option *ngFor="let bank of banks" [value]="bank.bankName">
+                  {{bank.bankName}}
+                </mat-option>
+              </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6 col-xs-12">
+              <mat-form-field>
+                <input formControlName="bankAccount" matInput placeholder="Bank Account No. / Nombor Akaun Bank">
+              </mat-form-field>
+            </div>
+          </div>  
+      </mat-expansion-panel>
+    </mat-accordion>
+     <!-- Bank  -->
+    <mat-divider></mat-divider>
+    <!--Uplod Image  -->
+    <mat-accordion>
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <span class="material-icons">cloud_upload</span>
+            <span>&nbsp;&nbsp;Upload Image / Muat Naik Imej</span>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="row">
+          <div class="col col-xs-12">
+            <dx-file-uploader #fileUploaderItem [multiple]="false" selectButtonText='Select Image'
+              labelText='Front Page IC / IC Muka Depan' accept="*" uploadMode="useForm"
+              (onValueChanged)="OnItemFileChange($event)"></dx-file-uploader>
+          </div>
+          <div class="col col-xs-12">
+            <div class="form-group">
+              <a><img class="itemimg" src="{{itemImgUrl}}" width="200px" height="200px" /> </a>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col col-xs-12">
+              <dx-file-uploader #fileUploaderItem [multiple]="false" selectButtonText='Select Image'
+                labelText='Back Page IC / IC Muka Belakang' accept="*" uploadMode="useForm"
+                (onValueChanged)="OnItemFileChange2($event)"></dx-file-uploader>
+            </div>
+            <div class="col col-xs-12">
+              <div class="form-group">
+                <a><img class="itemimg" src="{{itemImgUrl2}}" width="200px" height="200px" /> </a>
+              </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-xs-12">
+              <dx-file-uploader #fileUploaderItem [multiple]="false" selectButtonText='Select Image'
+                labelText='Font Driving License / License Motor Depan' accept="*" uploadMode="useForm"
+                (onValueChanged)="OnItemFileChange3($event)"></dx-file-uploader>
+            </div>
+            <div class="col col-xs-12">
+              <div class="form-group">
+                <a><img class="itemimg" src="{{itemImgUrl3}}" width="200px" height="200px" /> </a>
+              </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-xs-12">
+              <dx-file-uploader #fileUploaderItem [multiple]="false" selectButtonText='Select Image'
+                labelText='Back Driving License / License Motor Belakang' accept="*" uploadMode="useForm"
+                (onValueChanged)="OnItemFileChange4($event)"></dx-file-uploader>
+            </div>
+            <div class="col col-xs-12">
+              <div class="form-group">
+                <a><img class="itemimg" src="{{itemImgUrl4}}" width="200px" height="200px" /> </a>
+              </div>
+            </div>
+        </div>
+        <div class="row">
+           <div class="col col-xs-12">
+             <mat-spinner *ngIf="isSubmiting"></mat-spinner>
+           </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+     <!--Uplod Image  -->
+   
+     <!--buttons  -->
+    <mat-toolbar color="primary">
+      <button type="submit" mat-raised-button 
+         (click)="saveReg()" 
+         [disabled]="!profileForm.valid || isSubmiting"
+         >
+        <i class="material-icons">send</i>
+        Submit / Hantar</button>
+       
+    </mat-toolbar>
+     <!--buttons  -->
+    <mat-divider></mat-divider>
+  </form>
+</div>

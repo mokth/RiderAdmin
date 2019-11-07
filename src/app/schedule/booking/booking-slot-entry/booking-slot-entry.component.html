@@ -1,0 +1,198 @@
+<dx-popup #popup id="popup-container"
+   class="popup"
+   [width]="350" 
+   [height]="390" 
+   [showTitle]="true" 
+   title="Booking" 
+   [dragEnabled]="false"
+  (onHiding)="onPopHide($event)"
+   [closeOnOutsideClick]="false"
+   [(visible)]="popupVisible">
+  <div *dxTemplate="let data of 'content'">
+    <div class="dx-fieldset">
+      <div class="dx-field">
+        <div class="dx-field-label">Select Date</div>
+        <div class="dx-field-value">
+          <dx-date-box 
+             [(value)]="booking.workDate" 
+             type="date" 
+             displayFormat="dd-MM-yyyy">
+          </dx-date-box>
+        </div>
+      </div>
+    </div>
+    <div class="dx-fieldset">
+      <div class="dx-field">
+        <div class="dx-field-label">Rider Name</div>
+        <div class="dx-field-value">
+            <dx-select-box 
+                [dataSource]="riders" 
+                displayExpr="Full_Name" 
+                valueExpr="Rider_Name" 
+                [(value)]="booking.rider_Name">
+          </dx-select-box>           
+        </div>
+      </div>
+    </div>
+  <div><small>Select Slots</small></div>
+  
+    <div class="row">
+        <div class="col-3 slot-butt">
+          <dx-button 
+                  stylingMode="contained" 
+                  text="10 am" 
+                  [type]="bookarr[0]?'success':'normal'" 
+                  [width]="80"
+                  [height]="40"
+                  (onClick)="slotclick(0)">
+          </dx-button>
+        </div>
+         <div class="col-3 slot-butt">
+           <dx-button 
+                  stylingMode="contained" 
+                  text="11 am" 
+                   [type]="bookarr[1]?'success':'normal'" 
+                  [width]="80"
+                   [height]="40"
+                  (onClick)="slotclick(1)">
+          </dx-button>
+        </div>
+         <div class="col-3 slot-butt">
+           <dx-button 
+                  stylingMode="contained" 
+                  text="12 pm" 
+                   [type]="bookarr[2]?'success':'normal'" 
+                  [width]="80"
+                   [height]="40"
+                  (onClick)="slotclick(2)">
+          </dx-button>
+        </div>
+         <div class="col-3 slot-butt">
+           <dx-button 
+                  stylingMode="contained" 
+                  text="01 pm" 
+                   [type]="bookarr[3]?'success':'normal'" 
+                  [width]="80"
+                   [height]="40"
+                  (onClick)="slotclick(3)">
+          </dx-button>
+        </div>
+    </div>
+     <div class="row">
+        <div class="col-3 slot-butt">
+          <dx-button 
+                  stylingMode="contained" 
+                  text="02 pm" 
+                   [type]="bookarr[4]?'success':'normal'"  
+                  [width]="80"
+                   [height]="40"
+                  (onClick)="slotclick(4)">
+          </dx-button>
+        </div>
+         <div class="col-3 slot-butt">
+           <dx-button 
+                  stylingMode="contained" 
+                  text="03 pm" 
+                   [type]="bookarr[5]?'success':'normal'" 
+                  [width]="80"
+                   [height]="40"
+                  (onClick)="slotclick(5)">
+          </dx-button>
+        </div>
+         <div class="col-3 slot-butt">
+           <dx-button 
+                  stylingMode="contained" 
+                  text="04 pm" 
+                   [type]="bookarr[6]?'success':'normal'" 
+                  [width]="80"
+                   [height]="40"
+                  (onClick)="slotclick(6)">
+          </dx-button>
+        </div>
+         <div class="col-3 slot-butt">
+           <dx-button 
+                  stylingMode="contained" 
+                  text="05 pm" 
+                   [type]="bookarr[7]?'success':'normal'" 
+                  [width]="80"
+                   [height]="40"
+                  (onClick)="slotclick(7)">
+          </dx-button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3 slot-butt">
+          <dx-button 
+                  stylingMode="contained" 
+                  text="06 pm" 
+                   [type]="bookarr[8]?'success':'normal'" 
+                  [width]="80"
+                   [height]="40"
+                  (onClick)="slotclick(8)">
+          </dx-button>
+        </div>
+         <div class="col-3 slot-butt">
+           <dx-button 
+                  stylingMode="contained" 
+                  text="07 pm" 
+                   [type]="bookarr[9]?'success':'normal'" 
+                  [width]="80"
+                   [height]="40"
+                  (onClick)="slotclick(9)">
+          </dx-button>
+        </div>
+         <div class="col-3 slot-butt">
+           <dx-button 
+                  stylingMode="contained" 
+                  text="08 pm" 
+                   [type]="bookarr[10]?'success':'normal'" 
+                  [width]="80"
+                   [height]="40"
+                  (onClick)="slotclick(10)">
+          </dx-button>
+        </div>
+         <div class="col-3 slot-butt">
+           <dx-button 
+                  stylingMode="contained" 
+                  text="09 pm" 
+                   [type]="bookarr[11]?'success':'normal'" 
+                  [width]="80"
+                   [height]="40"
+                  (onClick)="slotclick(11)">
+          </dx-button>
+        </div>
+    </div>
+     <div class="row">
+        <div class="col-3 slot-butt">
+          <dx-button 
+                  stylingMode="contained" 
+                  text="10 pm" 
+                   [type]="bookarr[12]?'success':'normal'" 
+                  [width]="80"
+                   [height]="40"
+                  (onClick)="slotclick(12)">
+          </dx-button>
+        </div>
+     </div>
+    <div class="row">
+        <div class="col">
+           <small>{{errmsg}}</small>
+        </div>
+    </div>
+    <div class="row button-action">
+      <div class="col">
+        <dx-button stylingMode="outlined" 
+                   text="Save" 
+                   type="normal" 
+                   [width]="90" 
+                   (onClick)="onSaveBook($event)">
+        </dx-button>
+      </div>
+      <div class="col">
+        <dx-button stylingMode="outlined" text="Cancel" type="normal" [width]="90" (onClick)="onCancelBook($event)">
+        </dx-button>
+      </div>
+    </div>
+
+  </div>
+</dx-popup>

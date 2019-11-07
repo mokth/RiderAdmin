@@ -1,0 +1,61 @@
+
+  <dx-toolbar [height]="toolbarHeight">
+    <dxi-item location="before">
+      <div class="toolbar-image" (click)="onDrawer()">
+        <span class="material-icons">directions_bike</span>
+      </div>
+    </dxi-item>
+    <dxi-item location="before">
+      <div class="toolbar-label">
+        <span> Rider App</span>
+      </div>
+    </dxi-item>
+
+    <!-- <dxi-item location="after" *ngIf="isAuthenticated()">
+            <div Class="main-menu">
+            <dx-menu cssClass="menu-item" 
+              [items]="menuItems" 
+              [hoverStateEnabled]="true" 
+              [focusStateEnabled]="false"
+              (onItemClick)="menuItemClick($event)"
+              displayExpr="text">
+            </dx-menu>
+          </div>
+          </dxi-item> -->
+    <dxi-item location="after" *ngIf="!isAuthenticated()">
+      <div class="toolbar-LogIn">
+        <ul>
+          <li><a [routerLink]="['/login']">Log In</a></li>
+        </ul>
+      </div>
+    </dxi-item>
+    <dxi-item location="after" *ngIf="isAuthenticated()">
+      <div class="toolbar-label2">
+        <span> Wellcome Admin</span>
+      </div>
+    </dxi-item>
+  </dx-toolbar>
+
+  <dx-drawer #drawer id="drawer"
+    [openedStateMode]="selectedOpenMode" 
+    [position]="selectedPosition" 
+    [revealMode]="selectedRevealMode"
+    template="template" [opened]="true" [closeOnOutsideClick]="true">
+    <div *dxTemplate="let data of 'template'" style="width: 200px">
+      <div>
+        <dx-tree-view *ngIf="isAuthenticated()" class="jumbotron" class="panel-list dx-theme-accent-as-background-color"
+          id="simple-treeview" [items]="menuItems" [width]="300" (onItemClick)="selectedItem($event)">
+        </dx-tree-view>
+      </div>
+      <div>
+        <img [src]="getLogo()" class="img-fluid" alt="Responsive image">
+      </div>
+    </div>
+    <div id="content" class="dx-theme-background-color">
+      <div class="divider">
+        <p></p>
+      </div>
+
+      <router-outlet></router-outlet>
+    </div>
+  </dx-drawer>

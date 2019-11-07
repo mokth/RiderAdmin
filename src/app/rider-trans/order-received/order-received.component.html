@@ -1,0 +1,38 @@
+<h6>Order Received List</h6>
+<dx-data-grid #dxgrid id="gridContainer" 
+      [dataSource]="dataSource" 
+      [wordWrapEnabled]="true" 
+      [allowColumnResizing]="true"
+      [showBorders]="true">
+  <dxo-filter-row 
+         [visible]="true" 
+         [applyFilter]="true">
+  </dxo-filter-row>   
+  
+  <dxo-search-panel [visible]="true" 
+         [width]="240" 
+         placeholder="Search...">
+ </dxo-search-panel>
+  <dxo-paging [pageSize]="10"></dxo-paging>
+  <dxo-pager [showPageSizeSelector]="true" 
+             [allowedPageSizes]="[5, 10, 20]" 
+             [showInfo]="true">
+  </dxo-pager>
+  <dxi-column dataField="receivedOn" caption="Date" dataType="date" visibleIndex=0></dxi-column>
+  <dxi-column dataField="orderNo" caption="Order No" visibleIndex=1></dxi-column>  
+  <dxi-column dataField="rider_Name" caption="Name" visibleIndex=2></dxi-column>  
+  <dxi-column dataField="distance" caption="Distance" visibleIndex=3></dxi-column>  
+  <dxi-column dataField="kmIncentive" caption="KM Incentive" dataType="number" visibleIndex=3>
+    <dxo-format
+        type="fixedPoint"
+        [precision]="2">
+    </dxo-format>
+  </dxi-column>
+  <dxi-column dataField="tripIncentive" caption="Trip Incentive" dataType="number" visibleIndex=4>
+    <dxo-format
+        type="fixedPoint"
+        [precision]="2">
+    </dxo-format>
+  </dxi-column>  
+ 
+</dx-data-grid>

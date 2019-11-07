@@ -1,0 +1,18 @@
+dx-toolbar{
+    background-color: #FF5733;
+  }
+  
+agm-map { 
+    height: 80vh; /* height is required */ 
+}
+#map {
+    height: 80vh; /* height is required */ 
+}
+
+.toolbar-label {
+    white-space: nowrap;   
+}
+
+::ng-deep .list-item {
+  color:white;   
+}

@@ -1,0 +1,32 @@
+.outer {
+    margin: 30px 20px 20px 20px;
+}
+::ng-deep .employee {
+    background-color: rgba(86, 202, 133, 0.1);
+}
+
+::ng-deep .dx-scheduler-date-table-other-month.dx-scheduler-date-table-cell {
+    opacity: 0.8;
+    color: rgba(0, 0, 0, 0.3); 
+}
+
+
+::ng-deep .dx-scheduler-date-table-cell {
+  
+    color: red;
+}
+
+
+::ng-deep .day-cell {
+    height: 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+::ng-deep .bullet {
+    background-color:#F2F3F4;
+}
+
+::ng-deep .table {
+    font-size: 12px;
+}

@@ -1,0 +1,98 @@
+<h6>Transaction List</h6>
+<div class="btn-row">
+  <div class="btn-padding">
+    <dx-button stylingMode="outlined" 
+               text="New" 
+               type="normal"    
+               icon="add"  
+               width="100"   
+               (onClick)="onNewTrans($event)">
+    </dx-button>  
+  </div>  
+    <div class="btn-padding">
+      <dx-button stylingMode="outlined" 
+                 text="Approve" 
+                 type="normal"    
+                 icon="check"  
+                 width="100"   
+                 [disabled]="canApprove"        
+                 (onClick)="onApproveTrx($event)">
+      </dx-button>  
+    </div>  
+    <div class="btn-padding">
+      <dx-button stylingMode="outlined" 
+                 text="Cancel" 
+                 type="normal" 
+                 icon="close"    
+                 width="100"     
+                 [disabled]="canCancel"     
+                 (onClick)="onCancelTrx($event)">
+      </dx-button>
+    </div>
+</div>
+<dx-data-grid #dxgrid id="gridContainer" 
+      [dataSource]="dataSource" 
+      [wordWrapEnabled]="true" 
+      [showBorders]="true">
+   <dxo-selection
+      mode="multiple"> <!-- "multiple" | "none" -->
+  </dxo-selection>
+  <dxo-filter-row 
+         [visible]="true" 
+         [applyFilter]="true">
+  </dxo-filter-row>
+  <dxo-state-storing [enabled]="true" type="localStorage" storageKey="storage"></dxo-state-storing>
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
+  <dxo-search-panel [visible]="true" 
+         [width]="240" 
+         placeholder="Search...">
+ </dxo-search-panel>
+  <dxo-paging [pageSize]="10"></dxo-paging>
+  <dxo-pager [showPageSizeSelector]="true" 
+             [allowedPageSizes]="[5, 10, 20]" 
+             [showInfo]="true">
+  </dxo-pager>
+  <dxi-column dataField="transactionDate" caption="Date" dataType="date"></dxi-column>
+  <dxi-column dataField="rider_Name" caption="Name"></dxi-column>  
+  <dxi-column dataField="orderNo" caption="Order No"></dxi-column>  
+  <dxi-column dataField="transactionDesc" caption="Description"></dxi-column>
+  <dxi-column dataField="transactionType" caption="Trx Type" cellTemplate="typeCellTemplate"></dxi-column>
+  <dxi-column dataField="refType" caption="Ref Type" ></dxi-column>
+    <div *dxTemplate="let d of 'typeCellTemplate'">
+     <div >
+        <i class="material-icons" style="vertical-align: -6px;" *ngIf="d.data.transactionType=='IN'">
+            add_circle_outline
+        </i>
+        <i class="material-icons" style="vertical-align: -6px;" *ngIf="d.data.transactionType!='IN'">
+            remove_circle_outline
+        </i>
+        <span class="trxtype">{{d.data.transactionType}}</span> 
+     </div>
+    
+    </div>
+
+  <dxi-column dataField="transactionAmt" caption="Amount" dataType="number">
+    <dxo-format
+        type="fixedPoint"
+        [precision]="2">
+    </dxo-format>
+  </dxi-column>
+  <dxi-column dataField="transactionStatus" caption="Status"></dxi-column>
+  <dxi-column dataField="remarks" caption="Remark"></dxi-column>
+  <dxi-column caption="Action" cellTemplate="actionCellTemplate"></dxi-column>
+  <div *dxTemplate="let d of 'actionCellTemplate'">
+      <dx-button-group 
+        [items]="buttons" 
+        keyExpr="action" 
+        stylingMode="text" 
+        (onItemClick)="actionClick($event,d.data)">
+      </dx-button-group>
+  </div>
+</dx-data-grid>
+<app-tran-entry 
+   [transType]="transType"
+   [mode]="mode"
+   [transdtl]="selectedTrans"
+   (messageEvent)="receiveMessage($event)"
+   [popupVisible]="popupVisible">
+</app-tran-entry>

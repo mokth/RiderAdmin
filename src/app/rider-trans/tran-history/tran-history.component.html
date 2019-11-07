@@ -1,0 +1,62 @@
+<dx-toolbar height="30">
+  <dxi-item location="center" widget="dxButton" locateInMenu="never">
+    <div *dxTemplate>
+      <div class='toolbar-label'><b>Transaction History</b></div>
+    </div>
+  </dxi-item>
+</dx-toolbar>
+<dx-data-grid #dxgrid id="gridContainer" 
+      [dataSource]="dataSource" 
+      [wordWrapEnabled]="true" 
+      [allowColumnResizing]="true"
+      [showBorders]="true">
+  <dxo-filter-row 
+         [visible]="true" 
+         [applyFilter]="true">
+  </dxo-filter-row>  
+ 
+  <dxo-state-storing [enabled]="true" type="localStorage" storageKey="storage"></dxo-state-storing>
+  <dxo-search-panel [visible]="true" 
+         [width]="240" 
+         placeholder="Search...">
+ </dxo-search-panel>
+  <dxo-paging [pageSize]="10"></dxo-paging>
+  <dxo-pager [showPageSizeSelector]="true" 
+             [allowedPageSizes]="[5, 10, 20]" 
+             [showInfo]="true">
+  </dxo-pager>
+  <dxi-column dataField="transactionDate" caption="Date" dataType="date"></dxi-column>
+  <dxi-column dataField="rider_Name" caption="Name"></dxi-column>  
+  <dxi-column dataField="orderNo" caption="Order No"></dxi-column>  
+  <dxi-column dataField="transactionDesc" caption="Description"></dxi-column>
+  <dxi-column dataField="transactionType" caption="Trx Type"></dxi-column>
+  <dxi-column dataField="refType" caption="Ref Type" ></dxi-column>
+  <dxi-column dataField="transactionStatus" caption="Status"></dxi-column>
+  <dxi-column dataField="amountIn" caption="Debit" dataType="number">
+    <dxo-format
+        type="fixedPoint"
+        [precision]="2">
+    </dxo-format>
+  </dxi-column>
+  <dxi-column dataField="amountOut" caption="Credit" dataType="number">
+    <dxo-format
+        type="fixedPoint"
+        [precision]="2">
+    </dxo-format>
+  </dxi-column>
+  <dxi-column dataField="remarks" caption="Remark"></dxi-column>
+  <dxo-summary>
+    <dxi-total-item
+        column="amountIn"
+        summaryType="sum"
+        displayFormat="{0}"
+        valueFormat="currency">
+    </dxi-total-item>
+    <dxi-total-item
+        column="amountOut"
+        summaryType="sum"
+        displayFormat="{0}"
+        valueFormat="currency">
+    </dxi-total-item>
+  </dxo-summary>
+</dx-data-grid>

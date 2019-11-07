@@ -1,0 +1,50 @@
+<dx-box direction="row" width="100%" height="100%">
+  <dxi-item baseSize="80%">
+    <agm-map #AgmMap 
+            [latitude]='latitude' 
+            [longitude]='longitude'
+            [zoom]="14" 
+            [mapTypeId]='mapType'>
+        <agm-marker *ngFor="let marker of markers"
+          (markerClick)="onMarkerClick($event)"
+          [title]="marker.label" 
+          [latitude]="marker.lat"
+          [iconUrl]="getMarkerIcon()"
+          [longitude]="marker.lng">
+        </agm-marker>
+    </agm-map>
+  </dxi-item>
+  <dxi-item baseSize="20%">
+    <dx-toolbar height="30">
+      <dxi-item location="before" 
+         widget="dxButton"
+         locateInMenu="never">
+        <div *dxTemplate>
+          <div class='toolbar-label'><b>{{connected}}</b></div>
+        </div>
+      </dxi-item>
+      <dxi-item *ngIf="!isConnected"       
+          location="after" 
+           widget="dxButton"
+           [options]="refreshButtonOptions"
+           locateInMenu="auto" >         
+        </dxi-item>
+    </dx-toolbar>
+    <div class="border-top my-1"></div>
+    <dx-toolbar height="30">
+        <dxi-item location="center" widget="dxButton" locateInMenu="never">
+          <div *dxTemplate>
+            <div class='toolbar-label'><b>Rider List</b></div>
+          </div>
+        </dxi-item>
+      </dx-toolbar>
+    <dx-list [items]="riders" 
+             [height]="400" 
+             [showSelectionControls]="false"
+             itemTemplate="listItem">
+       <div *dxTemplate="let item of 'listItem'">
+            <b class="list-item">{{item.rider}}</b>             
+        </div>
+    </dx-list>
+  </dxi-item>
+</dx-box>

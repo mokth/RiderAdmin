@@ -1,0 +1,320 @@
+<div class="container">
+  <!--tool bar -->
+  <mat-toolbar color="primary">
+    <i class="material-icons">motorcycle</i>
+    <span>&nbsp;&nbsp;Rider Registration</span>
+    <span class="fill-remaining-space"></span>
+    <span> <button mat-button>FAQ</button> </span>
+  </mat-toolbar>
+  <!--tool bar -->
+  <form [formGroup]="profileForm">
+    <!--Rider Personal Data -->
+    <mat-accordion>
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Rider Personal Data
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="row">
+          <div class="col-md-6 col-xs-12">
+            <mat-form-field>
+              <input formControlName="name" required="true" matInput placeholder="Full Name">
+            </mat-form-field>
+          </div>
+          <div class="col-md-6 col-xs-12">
+            <mat-form-field>
+              <input formControlName="nickname" required="true" matInput placeholder="Nick Name">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-xs-12">
+            <mat-form-field>
+              <mat-label>Nationality</mat-label>
+              <mat-select formControlName="nationality" (selectionChange)="onNationalityChange()" required="true">
+                <mat-option value="Malaysia">
+                  Malaysian
+                </mat-option>
+                <mat-option value="Other">
+                  Other / Bukan Malaysia
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6 col-xs-12">
+            <mat-form-field>
+              <input *ngIf="isLocal" formControlName="icno" required="true" matInput mask='000000-00-0000'
+                placeholder="NRIC / IC No / Passport No">
+              <input *ngIf="!isLocal" formControlName="icno" required="true" matInput placeholder="Passport No">
+            </mat-form-field>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-xs-12">
+            <mat-form-field>
+              <input formControlName="dob" required="true" id="dob" matInput [matDatepicker]="picker"
+                placeholder="DOB">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6 col-xs-12">
+            <mat-form-field>
+              <mat-label>Gender</mat-label>
+              <mat-select formControlName="gender" required="true">
+                <mat-option value="Male">
+                  Male / Lelaki
+                </mat-option>
+                <mat-option value="Female">
+                  Female / Perempuan
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <!--Rider Personal Data -->
+    <mat-divider></mat-divider>
+    <!-- Contact -->
+    <mat-accordion>
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title> 
+            Contact
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="row">
+          <div class="col-md-6 col-xs-12">
+            <mat-form-field>
+              <mat-label>Mobile No1</mat-label>
+              <!-- <input formControlName="mobil1" required="true" matInput placeholder="Mobile No1 / Telefon Bimbit1"> -->
+              <ngx-mat-intl-tel-input [onlyCountries]="['my']" 
+                [enablePlaceholder]="true" name="phone" required="true" formControlName="mobil1" #phone>
+              </ngx-mat-intl-tel-input>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6 col-xs-12">
+            <mat-form-field>
+              <mat-label>Mobile (Whatsapp)</mat-label>
+              <!-- <input formControlName="mobil1" required="true" matInput placeholder="Mobile No1 / Telefon Bimbit1"> -->
+              <ngx-mat-intl-tel-input [onlyCountries]="['my']" 
+                [enablePlaceholder]="true" name="phone" formControlName="mobil2" #phone>
+              </ngx-mat-intl-tel-input>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-xs-12">
+            <mat-form-field>
+              <mat-label>Emergency Contact</mat-label>
+              <!-- <input formControlName="mobil1" required="true" matInput placeholder="Mobile No1 / Telefon Bimbit1"> -->
+              <ngx-mat-intl-tel-input [onlyCountries]="['my']" 
+                [enablePlaceholder]="true" required="true" name="phone" formControlName="emergency" #phone>
+              </ngx-mat-intl-tel-input>
+
+            </mat-form-field>
+          </div>
+          <div class="col-md-6 col-xs-12">
+            <mat-form-field>
+              <input formControlName="contact" required="true" matInput placeholder="Contact Relationship">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-xs-12">
+              <mat-form-field>
+                <input formControlName="address" matInput placeholder="Address / Alamat">
+              </mat-form-field>
+           </div>         
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <!-- Contact -->
+    <mat-divider></mat-divider>
+    <!--  Working Experience -->
+    <mat-accordion>
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Working Experience
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="row">
+          <div class="col-md-6 col-xs-12">
+            <mat-form-field>
+              <input formControlName="vehicle" required="true" matInput placeholder="Vehicle No">
+            </mat-form-field>
+          </div>
+          <div class="col-md-6 col-xs-12">
+            <mat-form-field>
+              <input formControlName="driving" required="true" matInput
+                placeholder="Driving License No">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-xs-12">
+            <mat-form-field>
+              <input formControlName="working1" matInput placeholder="Working Experience 1">
+            </mat-form-field>
+          </div>
+          <div class="col-md-6 col-xs-12">
+            <mat-form-field>
+              <input formControlName="working2" matInput placeholder="Working Experience 2">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-xs-12">
+            <mat-form-field>
+              <input formControlName="stardate" required="true" id="dwork" matInput [matDatepicker]="picker2"
+                placeholder="Available Date">
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6 col-xs-12">
+            <mat-form-field>
+              <input formControlName="remark" matInput placeholder="Remark">
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <!--  Working Experience -->
+    <mat-divider></mat-divider>
+    <!--  Bank info -->
+    <mat-accordion>
+      <mat-expansion-panel [expanded]="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <span class="material-icons">library_books</span>&nbsp;&nbsp;Bank Info / Maklumat Bank 
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="row">
+            <div class="col-md-6 col-xs-12">
+                <mat-form-field>
+                    <mat-label>Bank Name / Name Bank</mat-label>
+                    <mat-select formControlName="bankName" >
+                      <mat-option *ngFor="let bank of banks" [value]="bank.bankName">
+                        {{bank.bankName}}
+                      </mat-option>
+                    </mat-select>
+                    </mat-form-field>
+            </div>
+            <div class="col-md-6 col-xs-12">
+              <mat-form-field>
+                <input formControlName="bankAccount" required="true" matInput placeholder="Bank Account No. / Nombor Akaun Bank">
+              </mat-form-field>
+            </div>
+          </div>  
+      </mat-expansion-panel>
+    </mat-accordion>
+     <!--  Bank info -->
+    <mat-divider></mat-divider>
+     <!--  Admin Confirmation -->
+    <mat-accordion>
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Admin Confirmation
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="row">
+          <div class="col-md-6 col-xs-12">
+            <mat-form-field>
+              <input formControlName="joindate" required="true" id="dwork" matInput [matDatepicker]="picker3"
+                placeholder="Join Date">
+              <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+              <mat-datepicker #picker3></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6 col-xs-12">
+            <mat-form-field>
+              <mat-label>Status</mat-label>
+              <mat-select formControlName="status" required="true">
+                <mat-option value="NEW">
+                   NEW
+                </mat-option>
+                <mat-option value="REJECT">
+                   REJECT
+                </mat-option>
+                <mat-option value="PENDING">
+                   PENDING
+                </mat-option>
+                <mat-option value="CONFIRM">
+                    CONFIRM
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+     <!--  Admin Confirmation -->
+    <mat-divider></mat-divider>
+    <!--  Uploaded Images -->
+    <mat-accordion>
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Uploaded Images
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="row">
+          <div class="col">
+            <h6>IC Front Page</h6>
+            <div class="form-group">
+              <a><img class="itemimg" src="{{itemImgUrl1}}" width="200px" height="200px" /> </a>
+            </div>
+          </div>
+          <div class="col">
+              <h6>IC Back Page</h6>
+            <div class="form-group">
+              <a><img class="itemimg" src="{{itemImgUrl2}}" width="200px" height="200px" /> </a>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h6>Driving License Front Page</h6>
+              <div class="form-group">
+                <a><img class="itemimg" src="{{itemImgUrl3}}" width="200px" height="200px" /> </a>
+              </div>
+            </div>
+            <div class="col">
+                <h6>Driving License Back Page</h6>
+              <div class="form-group">
+                <a><img class="itemimg" src="{{itemImgUrl4}}" width="200px" height="200px" /> </a>
+              </div>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-spinner *ngIf="isShowLoading"></mat-spinner>
+          </div>
+       </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+     <!--  Uploaded Images -->
+    <mat-divider></mat-divider>
+     <!--  Action Buttons -->
+    <mat-toolbar color="primary">
+      <button type="submit" mat-raised-button 
+         (click)="saveReg()"
+          [disabled]="!profileForm.valid ">
+        <i class="material-icons">send</i>
+        Submit / Hantar</button>
+    </mat-toolbar>
+     <!--  Action Buttons -->
+    <mat-divider></mat-divider>
+  </form>
+</div>

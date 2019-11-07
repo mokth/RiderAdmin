@@ -1,0 +1,117 @@
+<h6>Working Day Booking</h6>
+<div>
+  <div class="row">
+    <div class="col-4">
+      <div class="row">
+      </div>
+      <table class="table table-sm">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Time</th>
+              <th scope="col">Count</th>
+              <th scope="col">Daily Summary</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let slot of timeSlots">
+              <th scope="row">{{slot.timeSlot}}</th>
+              <td> {{slot.count}}</td>
+              <td>
+                <dx-bullet class="bullet" targetColor="yellow" [value]="slot.count" [target]="25" [showTarget]="false"
+                  width="400" color="#e55253">
+                </dx-bullet>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+    <div class="col-8">
+      <div class="row">
+        <div class="col-4">
+            <div class="dx-fieldset">
+                <div class="dx-field">
+                  <div class="dx-field-label">Select Date</div>
+                  <div class="dx-field-value">
+                    <dx-date-box [value]="selectedDate" type="date" (onValueChanged)="onDateChanged($event)"
+                      displayFormat="dd-MM-yyyy">
+                    </dx-date-box>
+                  </div>
+                </div>
+              </div>
+        </div>
+        <div class="col-4">
+            <div class="dx-fieldset">
+                <div class="dx-field">
+                  <div class="dx-field-label">Select Name</div>
+                  <div class="dx-field-value">
+                    <dx-lookup [dataSource]="riders" [closeOnOutsideClick]="true" [showPopupTitle]="false"
+                      [showClearButton]="true" displayExpr="Full_Name" (onSelectionChanged)="onNameChanged($event)"
+                      valueExpr="Rider_Name">
+                    </dx-lookup>
+                  </div>
+                </div>
+              </div>
+        </div>
+        <div class="col-4">
+            <div class="dx-fieldset">
+                <div class="dx-field">
+                  <div class="dx-field-label">Select Slot</div>
+                  <div class="dx-field-value">
+                    <dx-select-box [dataSource]="slots" displayExpr="description" valueExpr="code"
+                      [showClearButton]="true" [value]="selectedSlot" (onSelectionChanged)="onSlotChange($event)">
+                    </dx-select-box>
+                  </div>
+                </div>
+              </div>
+        </div>
+      </div>
+      <div class="row">
+          <dx-button stylingMode="outlined" text="New Booking" type="success" [width]="120"
+          (onClick)="onNewBooking($event)">
+        </dx-button>
+      </div>
+      <div class="row">
+          <dx-data-grid id="gridContainer" [dataSource]="datasrc" [showBorders]="true">
+              <dxo-paging [pageSize]="10">
+              </dxo-paging>
+              <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20]" [showInfo]="true">
+              </dxo-pager>
+              <dxi-column dataField="rider_Name"></dxi-column>
+              <dxi-column dataField="slot"></dxi-column>
+              <dxi-column dataField="timeSlot"></dxi-column>
+              <dxi-column dataField="updatedBy"></dxi-column>
+              <dxi-column dataField="updatedOn" dataType="date"></dxi-column>
+              <!-- <dxi-column dataField="status"></dxi-column>
+              <dxi-column dataField="note"></dxi-column> -->
+              <dxi-column caption="Action" cellTemplate="actionCellTemplate"></dxi-column>
+              <div *dxTemplate="let d of 'actionCellTemplate'">
+                <dx-button-group [items]="buttons" keyExpr="action" stylingMode="text"
+                  (onItemClick)="itemClick($event,d.data)">
+                </dx-button-group>
+              </div>
+            </dx-data-grid>
+      </div>
+    </div>
+  </div>
+</div>
+<app-bookingslot-entry (messageEvent)="receiveMessage($event)" [popupVisible]="popupVisible" [slots]="slots"
+  [mode]="mode" [bookarr]="bookarr" [booking]="selectedBooking">
+</app-bookingslot-entry>
+<!-- <dx-scheduler #scheduler id="scheduler-container" 
+             [views]="['month']" 
+             height="400" currentView="month"
+             [dataSource]="booksumm" 
+             [currentDate]="selectedDate" 
+             (onOptionChanged)="onOptionChanged($event)"
+             dataCellTemplate="dataCellTemplate">
+             <dxo-editing #editingOptions
+             [allowAdding]="false"
+             [allowUpdating]="false"
+             [allowDeleting]="false"
+             [allowResizing]="true"
+             [allowDragging]="false"
+         ></dxo-editing>
+            <div *dxTemplate="let cellData of 'dataCellTemplate'">
+              <div class='day-cell'>{{cellData.text}}</div>
+            </div>
+          </dx-scheduler> -->

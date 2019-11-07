@@ -1,0 +1,121 @@
+<dx-popup #popup id="popup-container"
+   class="popup"
+   [width]="350" 
+   [height]="400" 
+   [showTitle]="true" 
+   title="Transaction Entry" 
+   [dragEnabled]="false"
+   [closeOnOutsideClick]="false"
+   (onHiding)="onPopHide($event)"
+   [(visible)]="popupVisible">
+  <div *dxTemplate="let data of 'content'">
+    <div class="dx-fieldset">
+      <div class="dx-field">
+        <div class="dx-field-label">Trx Date</div>
+        <div class="dx-field-value">
+          <dx-date-box 
+             [(value)]="transdtl.transactionDate" 
+             type="date" 
+             [disabled]="mode=='Edit'"
+             displayFormat="dd-MM-yyyy">
+          </dx-date-box>
+        </div>
+      </div>
+    </div>
+    <div class="dx-fieldset">
+      <div class="dx-field">
+        <div class="dx-field-label">Rider Name</div>
+        <div class="dx-field-value">
+        <dx-lookup
+            [dataSource]="riders"
+            [closeOnOutsideClick]="true"
+            [showPopupTitle]="false"
+            displayExpr="Full_Name" 
+            [(value)]="transdtl.rider_Name" 
+            valueExpr="Rider_Name" >
+        </dx-lookup>
+          <!-- <dx-select-box 
+              [dataSource]="riders" 
+              [disabled]="mode=='Edit'"
+              displayExpr="Full_Name" 
+              valueExpr="Rider_Name" 
+              [(value)]="transdtl.rider_Name" 
+             >
+        </dx-select-box>          -->
+        </div>
+      </div>
+    </div>
+    <div class="dx-fieldset">
+      <div class="dx-field">
+        <div class="dx-field-label">Trx Type</div>
+        <div class="dx-field-value">
+          <dx-select-box 
+              [dataSource]="transType" 
+              displayExpr="display" 
+              valueExpr="display" 
+              (onSelectionChanged)="transTypeChange($event)"
+              [(value)]="transdtl.transactionDesc" 
+             >
+    </dx-select-box>           
+        </div>
+      </div>
+    </div>
+    <div class="dx-fieldset">
+      <div class="dx-field">
+        <div class="dx-field-label">Amount</div>
+        <div class="dx-field-value">
+          <dx-number-box
+              [(value)]="transdtl.transactionAmt" 
+              [showSpinButtons]="true"
+              [showClearButton]="true"
+          ></dx-number-box>
+        </div>
+      </div>
+    </div>
+    <div class="dx-fieldset">
+      <div class="dx-field">
+        <div class="dx-field-label">Status</div>
+        <div class="dx-field-value">
+            <dx-text-box 
+             [readOnly]="true"
+             [(value)]="transdtl.transactionStatus">
+            </dx-text-box>
+          <!-- <dx-select-box 
+              [dataSource]="status" 
+              [disabled]="true"
+              [(value)]="transdtl.transactionStatus" 
+             >
+        </dx-select-box>      -->
+        </div>
+      </div>
+    </div>
+    <div class="dx-fieldset">
+      <div class="dx-field">
+        <div class="dx-field-label">Note</div>
+        <div class="dx-field-value">
+          <dx-text-area 
+              [height]="90" 
+              [maxLength]="250" 
+              [(value)]="transdtl.remarks">
+        </dx-text-area>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+         <small>{{errmsg}}</small>
+      </div>
+   </div>
+    <div class="row">
+      <div class="col">
+        <dx-button stylingMode="outlined" text="Save" type="normal" [width]="90" (onClick)="onSave($event)">
+        </dx-button>
+      </div>
+      <div class="col">
+        <dx-button stylingMode="outlined" text="Cancel" type="normal" [width]="90" (onClick)="onCancel($event)">
+        </dx-button>
+      </div>
+    </div>
+  </div>
+  
+</dx-popup>

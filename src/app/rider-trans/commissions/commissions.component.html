@@ -1,0 +1,64 @@
+<h6>Rider Commision List</h6>
+<dx-data-grid #dxgrid id="gridContainer" 
+      [dataSource]="dataSource" 
+      [wordWrapEnabled]="true" 
+      [allowColumnResizing]="true"
+      [showBorders]="true">
+  <dxo-filter-row 
+         [visible]="true" 
+         [applyFilter]="true">
+  </dxo-filter-row>  
+ 
+  
+  <dxo-search-panel [visible]="true" 
+         [width]="240" 
+         placeholder="Search...">
+ </dxo-search-panel>
+  <dxo-paging [pageSize]="10"></dxo-paging>
+  <dxo-pager [showPageSizeSelector]="true" 
+             [allowedPageSizes]="[5, 10, 20]" 
+             [showInfo]="true">
+  </dxo-pager>
+  <dxi-column dataField="trxDate" caption="Date" dataType="date" visibleIndex=0></dxi-column>
+  <dxi-column dataField="orderNo" caption="Order No" visibleIndex=1></dxi-column>  
+  <dxi-column dataField="rider_Name" caption="Name" visibleIndex=2></dxi-column>  
+  <dxi-column dataField="amount" caption="Amount" dataType="number" visibleIndex=3>
+    <dxo-format
+        type="fixedPoint"
+        [precision]="2">
+    </dxo-format>
+  </dxi-column>
+  <dxi-column dataField="accumulateAmt" caption="Acc Amount" dataType="number" visibleIndex=4>
+    <dxo-format
+        type="fixedPoint"
+        [precision]="2">
+    </dxo-format>
+  </dxi-column>
+  <dxi-column dataField="level" caption="Level"  visibleIndex=5></dxi-column>
+  <dxi-column dataField="percent" caption="Percent" dataType="number"  visibleIndex=6>
+    <dxo-format
+        type="fixedPoint"
+        [precision]="2">
+    </dxo-format>
+  </dxi-column>
+  <dxi-column dataField="commissionAmt" caption="Commission" dataType="number" visibleIndex=7>
+    <dxo-format
+        type="fixedPoint"
+        [precision]="2">
+    </dxo-format>
+  </dxi-column>
+  <dxi-column dataField="accumulateCom" caption="Acc Commission" dataType="number" visibleIndex=8>
+    <dxo-format
+        type="fixedPoint"
+        [precision]="2">
+    </dxo-format>
+  </dxi-column>
+  <dxi-column dataField="movingAvg" caption="Moving Avg" dataType="number"  visibleIndex=9>
+    <dxo-format
+        type="fixedPoint"
+        [precision]="1">
+    </dxo-format>
+  </dxi-column>
+ 
+</dx-data-grid>
+

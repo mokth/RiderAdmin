@@ -1,0 +1,38 @@
+<h6>Rider Wallets</h6>
+<dx-data-grid #dxgrid id="gridContainer" 
+      [dataSource]="dataSource" 
+      [wordWrapEnabled]="true" 
+      [allowColumnResizing]="true"
+      [showBorders]="true">
+  <dxo-filter-row 
+         [visible]="true" 
+         [applyFilter]="true">
+  </dxo-filter-row>  
+ 
+  
+  <dxo-search-panel [visible]="true" 
+         [width]="240" 
+         placeholder="Search...">
+ </dxo-search-panel>
+  <dxo-paging [pageSize]="10"></dxo-paging>
+  <dxo-pager [showPageSizeSelector]="true" 
+             [allowedPageSizes]="[5, 10, 20]" 
+             [showInfo]="true">
+  </dxo-pager>
+  <dxi-column dataField="rider_Name" caption="Name" visibleIndex=0></dxi-column>  
+  <dxi-column dataField="walletBalance" caption="Amount" dataType="number" visibleIndex=1>
+    <dxo-format
+        type="fixedPoint"
+        [precision]="2">
+    </dxo-format>
+  </dxi-column>
+  <dxi-column dataField="createDate" caption="Created On" dataType="date" visibleIndex=2></dxi-column>
+  <dxi-column dataField="createBy" caption="Created By" visibleIndex=3></dxi-column>  
+  <dxi-column dataField="updateDate" caption="Updated On" dataType="date" visibleIndex=4></dxi-column>
+  <dxi-column dataField="UpdateBy" caption="Updated By" visibleIndex=5></dxi-column>  
+ 
+ 
+ 
+</dx-data-grid>
+
+

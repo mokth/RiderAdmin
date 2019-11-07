@@ -1,0 +1,42 @@
+
+mat-form-field {
+    width: 100%;
+  }
+  
+  /* .container {
+    width: 60% !important;
+    margin-top: 10px !important;
+    margin-bottom:  10px !important;
+  } */
+  .fill-remaining-space {
+     /* This fills the remaining space, by using flexbox. 
+        Every toolbar row uses a flexbox row layout. */
+     flex: 1 1 auto;
+   }
+   .itemimg {
+    display: block;
+    max-width:400px;
+    max-height:200px;
+    width: auto;
+    height: auto;
+  }
+ 
+ @media (min-width: 576px) {
+ 
+   .container {
+     width: 100% !important;
+     margin-top: 10px !important;
+     margin-bottom: 10px !important;
+   }
+ }
+ 
+ /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+ @media (min-width: 768px) {
+ 
+   .container {
+     width: 70% !important;
+     margin-top: 10px !important;
+     margin-bottom: 10px !important;
+   }
+ }
+ 

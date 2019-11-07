@@ -1,0 +1,11 @@
+.trxtype {
+    margin-top: -5px;
+}
+.btn-row {
+  display: inline;
+}
+.btn-padding{
+    display: inline;
+    padding-right: 5px;
+    padding-left: 5px;
+}

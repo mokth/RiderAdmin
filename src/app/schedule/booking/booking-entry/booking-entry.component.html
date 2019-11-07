@@ -1,0 +1,91 @@
+<dx-popup #popup id="popup-container"
+   class="popup"
+   [width]="350" 
+   [height]="400" 
+   [showTitle]="true" 
+   title="Booking-[ {{mode}} ]" 
+   [dragEnabled]="false"
+   [closeOnOutsideClick]="false"
+   [(visible)]="popupVisible">
+  <div *dxTemplate="let data of 'content'">
+    <div class="dx-fieldset">
+      <div class="dx-field">
+        <div class="dx-field-label">Select Date</div>
+        <div class="dx-field-value">
+          <dx-date-box 
+             [(value)]="booking.workDate" 
+             type="date" 
+             displayFormat="dd-MM-yyyy">
+          </dx-date-box>
+        </div>
+      </div>
+    </div>
+    <div class="dx-fieldset">
+      <div class="dx-field">
+        <div class="dx-field-label">Rider Name</div>
+        <div class="dx-field-value">
+            <dx-select-box 
+                [dataSource]="riders" 
+                displayExpr="Full_Name" 
+                valueExpr="Rider_Name" 
+                [(value)]="booking.rider_Name">
+          </dx-select-box>           
+        </div>
+      </div>
+    </div>
+   
+    <div class="dx-fieldset">
+      <div class="dx-field">
+        <div class="dx-field-label">Select Slot</div>
+        <div class="dx-field-value">
+          <dx-select-box 
+                [dataSource]="slots" 
+                displayExpr="description" 
+                valueExpr="code" 
+                [(value)]="booking.slot">
+          </dx-select-box>
+        </div>
+      </div>
+    </div>
+    <div class="dx-fieldset">
+            <div class="dx-field">
+              <div class="dx-field-label">Status</div>
+              <div class="dx-field-value">
+                <dx-select-box 
+                    [dataSource]="status"   
+                    [(value)]="booking.status"               
+                    >
+                </dx-select-box>
+              </div>
+            </div>
+    </div>
+    <div class="dx-fieldset">
+      <div class="dx-field">
+        <div class="dx-field-label">Note</div>
+        <div class="dx-field-value">
+          <dx-text-area 
+               [height]="90" 
+               [maxLength]="250" 
+               [(value)]="booking.note">
+          </dx-text-area>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col">
+           <small>{{errmsg}}</small>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <dx-button stylingMode="outlined" text="Save" type="normal" [width]="90" (onClick)="onSaveBook($event)">
+        </dx-button>
+      </div>
+      <div class="col">
+        <dx-button stylingMode="outlined" text="Cancel" type="normal" [width]="90" (onClick)="onCancelBook($event)">
+        </dx-button>
+      </div>
+    </div>
+
+  </div>
+</dx-popup>

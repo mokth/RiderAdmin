@@ -1,0 +1,29 @@
+
+.container {
+  
+    margin-top: 10px !important;
+    margin-bottom:  10px !important;
+  }
+
+  .fill-remaining-space {
+    /* This fills the remaining space, by using flexbox. 
+       Every toolbar row uses a flexbox row layout. */
+    flex: 1 1 auto;
+  }
+
+  .item-caption{
+    display: block;
+    font-size: 9px;
+    color:gray;
+    padding: 2;
+    margin: 0;
+  }
+
+  .item-data{
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color:darkblue;
+    padding: 2;
+    margin: 0;
+  }
