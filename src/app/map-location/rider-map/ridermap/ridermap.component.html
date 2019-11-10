@@ -9,7 +9,7 @@
           (markerClick)="onMarkerClick($event)"
           [title]="marker.label" 
           [latitude]="marker.lat"
-          [iconUrl]="getMarkerIcon()"
+          [iconUrl]="getMarkerIcon(marker)"
           [longitude]="marker.lng">
         </agm-marker>
     </agm-map>
@@ -43,7 +43,13 @@
              [showSelectionControls]="false"
              itemTemplate="listItem">
        <div *dxTemplate="let item of 'listItem'">
-            <b class="list-item">{{item.rider}}</b>             
+            <dx-button
+                        stylingMode="outlined"
+                        text="{{item.objectType}} {{item.rider}}"
+                        type="normal"
+                        [width]="120"
+                        (onClick)="onRiderClick(item)">
+            </dx-button>          
         </div>
     </dx-list>
   </dxi-item>

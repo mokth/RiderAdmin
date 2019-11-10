@@ -5,9 +5,10 @@
 export const environment = {
   production: false,
   BASE_URL: '/',
-  //apiUrl:'http://localhost:64946/api/',
-  apiUrl:'http://gala365.com.my/riderapi/api/',
-  hubUrl:'http://gala365.com.my/riderapi/riderHub',
+  apiUrl:'http://localhost:64946/api/',
+  //apiUrl:'http://gala365.com.my/riderapi/api/',
+  //hubUrl:'http://gala365.com.my/riderapi/riderHub',
+  hubUrl:'http://localhost:64946/riderHub/',
 };
 
 /*

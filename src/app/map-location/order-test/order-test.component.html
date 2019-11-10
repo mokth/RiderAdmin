@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            Order No: {{orderno}}
+        </div>
+        <div class="col">
+            Customer: {{customer}}
+        </div>
+        <div class="col">
+            Merchant: {{merchant}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <button (click)="onConnect()" class="btn btn-primary">
+                Connect
+            </button>
+        </div>
+        <div class="col">
+            <button (click)="onDisConnect()" class="btn btn-primary">
+                Disconnet
+            </button>
+        </div>
+        <div class="col">
+            <button (click)="onAcceptOrder()" class="btn btn-primary">
+                Accept
+            </button>
+        </div>
+        <div class="col">
+            <button (click)="onPickUpOrder()" class="btn btn-primary">
+                Pickup
+            </button>
+        </div>
+        <div class="col">
+            <button (click)="onDeliverOrder()" class="btn btn-primary">
+                Deliver
+            </button>
+        </div>
+    </div>
+</div>

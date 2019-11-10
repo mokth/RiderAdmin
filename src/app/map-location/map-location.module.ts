@@ -12,18 +12,14 @@ import { DxTemplateModule,
          DxToolbarModule,
          DxButtonModule 
         } from 'devextreme-angular';
-
-
-// import { DxTemplateModule } from 'devextreme-angular/core/template';
-// import { DxListModule } from 'devextreme-angular/ui/list';
-// import { DxBoxModule } from 'devextreme-angular/ui/box';
-// import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
-// import { DxButtonModule } from 'devextreme-angular/ui/button';
+import { OrderTestComponent } from './order-test/order-test.component';
+import { RiderOrderService } from './services/rider-order-services';
 
 
 @NgModule({
   declarations: [
     RidermapComponent,
+    OrderTestComponent,
   ],
   imports: [
     CommonModule,
@@ -42,6 +38,8 @@ import { DxTemplateModule,
       */
     })
   ],
- 
+  providers: [
+    RiderOrderService
+  ]
 })
 export class MapLocationModule { }
