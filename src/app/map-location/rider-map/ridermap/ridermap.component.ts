@@ -266,8 +266,9 @@ export class RidermapComponent implements OnInit,OnDestroy {
     if (maker.type == ObjectType.Merchant){
       switch (maker.status){
         case RiderOnlineStatus.Assigned: 
-          return this.baseUrl+"assets/pick.png";
-        case RiderOnlineStatus.Pickup:           
+          return this.baseUrl+"assets/readypick.png";
+        case RiderOnlineStatus.Pickup:      
+           return this.baseUrl+"assets/pick.png";     
         case RiderOnlineStatus.Completed: 
           return this.baseUrl+"assets/picked.png";
           default:

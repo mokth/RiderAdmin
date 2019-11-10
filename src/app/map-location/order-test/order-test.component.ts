@@ -132,4 +132,14 @@ export class OrderTestComponent implements OnInit {
         console.log(err);
       })
   }
+
+  onRejectOrder(){
+    this.hubConnection
+    .invoke("RejectOrder",this.foodOrder.riderName, this.foodOrder.orderNo)
+    .then((resp)=>{
+      console.log(resp);  
+    }).catch(err=>{
+      console.log(err);
+    })
+  }
 }
