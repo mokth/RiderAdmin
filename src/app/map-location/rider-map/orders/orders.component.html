@@ -1,0 +1,25 @@
+<dx-data-grid
+    #dxgrid id="gridContainer" 
+    [dataSource]="orders" 
+    [wordWrapEnabled]="true" 
+    [showBorders]="true">
+    <dxo-filter-row 
+        [visible]="true" 
+        [applyFilter]="true">
+    </dxo-filter-row>
+    <dxo-state-storing 
+         [enabled]="true"
+         type="localStorage" 
+         storageKey="storage">
+    </dxo-state-storing>
+    <dxo-header-filter [visible]="true">        
+    </dxo-header-filter>
+
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" 
+        [allowedPageSizes]="[5, 10, 20]" 
+        [showInfo]="true">
+    </dxo-pager>
+    <dxi-column dataField="orderNo" caption="Order No"></dxi-column>  
+    <dxi-column dataField="status" caption="Status"></dxi-column>  
+</dx-data-grid>

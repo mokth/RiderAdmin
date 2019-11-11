@@ -31,6 +31,8 @@ export class RidermapComponent implements OnInit,OnDestroy {
   connectionInterval:any;
   riders:ConnectedRider[]=[];
   refreshButtonOptions:any;
+  orders:AssignOrder[]=[];
+  tabitems:String[]=["Riders","Orders"];
 
   @ViewChild('AgmMap', { static: true }) agmMap: AgmMap;
 
@@ -40,6 +42,7 @@ export class RidermapComponent implements OnInit,OnDestroy {
     @Inject('BASE_URL') public baseUrl: string,
     public mapsApiLoader: MapsAPILoader) { 
       this.getConnectedUsers();
+      this.getOrders();
       this.refreshButtonOptions = {
         icon: 'refresh',
         onClick: () => {
@@ -83,6 +86,13 @@ export class RidermapComponent implements OnInit,OnDestroy {
           this.AddRiderMaker(rider);
         });
      })
+  }
+
+  getOrders(){
+    this.api.getOrders()
+     .subscribe((resp:any)=>{
+         this.orders = [...resp];
+     });
   }
 
   onInitServerHub(){

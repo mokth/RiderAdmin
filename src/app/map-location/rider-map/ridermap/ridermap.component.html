@@ -1,56 +1,42 @@
 <dx-box direction="row" width="100%" height="100%">
-  <dxi-item baseSize="80%">
-    <agm-map #AgmMap 
-            [latitude]='latitude' 
-            [longitude]='longitude'
-            [zoom]="14" 
-            [mapTypeId]='mapType'>
-        <agm-marker *ngFor="let marker of markers"
-          (markerClick)="onMarkerClick($event)"
-          [title]="marker.label" 
-          [latitude]="marker.lat"
-          [iconUrl]="getMarkerIcon(marker)"
-          [longitude]="marker.lng">
-        </agm-marker>
+  <dxi-item baseSize="70%">
+    <agm-map #AgmMap [latitude]='latitude' [longitude]='longitude' [zoom]="14" [mapTypeId]='mapType'>
+      <agm-marker *ngFor="let marker of markers" (markerClick)="onMarkerClick($event)" [title]="marker.label"
+        [latitude]="marker.lat" [iconUrl]="getMarkerIcon(marker)" [longitude]="marker.lng">
+      </agm-marker>
     </agm-map>
   </dxi-item>
-  <dxi-item baseSize="20%">
+  <dxi-item baseSize="30%" class="data-panel">
     <dx-toolbar height="30">
-      <dxi-item location="before" 
-         widget="dxButton"
-         locateInMenu="never">
+      <dxi-item location="before" widget="dxButton" locateInMenu="never">
         <div *dxTemplate>
           <div class='toolbar-label'><b>{{connected}}</b></div>
         </div>
       </dxi-item>
-      <dxi-item *ngIf="!isConnected"       
-          location="after" 
-           widget="dxButton"
-           [options]="refreshButtonOptions"
-           locateInMenu="auto" >         
-        </dxi-item>
+      <dxi-item *ngIf="!isConnected" location="after" widget="dxButton" [options]="refreshButtonOptions"
+        locateInMenu="auto">
+      </dxi-item>
     </dx-toolbar>
     <div class="border-top my-1"></div>
-    <dx-toolbar height="30">
-        <dxi-item location="center" widget="dxButton" locateInMenu="never">
-          <div *dxTemplate>
-            <div class='toolbar-label'><b>Rider List</b></div>
-          </div>
-        </dxi-item>
-      </dx-toolbar>
-    <dx-list [items]="riders" 
-             [height]="400" 
-             [showSelectionControls]="false"
-             itemTemplate="listItem">
-       <div *dxTemplate="let item of 'listItem'">
-            <dx-button
-                        stylingMode="outlined"
-                        text="{{item.objectType}} {{item.rider}}"
-                        type="normal"
-                        [width]="120"
-                        (onClick)="onRiderClick(item)">
-            </dx-button>          
+    <dx-tab-panel 
+         #tabPanel         
+         [items]="tabitems" 
+         [selectedIndex]="0" 
+         [loop]="false"
+         [animationEnabled]="true" 
+         [swipeEnabled]="true" 
+         >
+      <div *dxTemplate="let tab of 'item'">
+        <div *ngIf="tab=='Riders'">
+            <app-riders 
+               [riders]="riders"
+               (onRiderAssign)="onRiderClick($event)"></app-riders>
         </div>
-    </dx-list>
+        <div *ngIf="tab=='Orders'">
+            <app-orders [orders]="orders"></app-orders>
+        </div>
+      </div>
+    </dx-tab-panel>   
+
   </dxi-item>
 </dx-box>

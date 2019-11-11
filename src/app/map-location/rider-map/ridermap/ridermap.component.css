@@ -16,3 +16,7 @@ agm-map {
 ::ng-deep .list-item {
   color:white;   
 }
+
+::ng-deep .data-panel{
+  padding-left: 10px;
+}

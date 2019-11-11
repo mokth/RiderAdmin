@@ -41,4 +41,11 @@ export class RiderOrderService {
             { headers: headers });
     }
 
+    getOrders() {
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                          .set('Authorization', this.auth.getAuthToken());
+        return this.http.get(this.apiUrl + "/AssignOrder/orders",
+            { headers: headers });
+    }
+
 }

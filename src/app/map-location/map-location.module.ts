@@ -10,16 +10,22 @@ import { DxTemplateModule,
          DxListModule,
          DxBoxModule,
          DxToolbarModule,
-         DxButtonModule 
+         DxButtonModule, 
+         DxTabPanelModule,
+         DxDataGridModule
         } from 'devextreme-angular';
 import { OrderTestComponent } from './order-test/order-test.component';
 import { RiderOrderService } from './services/rider-order-services';
+import { RidersComponent } from './rider-map/riders/riders.component';
+import { OrdersComponent } from './rider-map/orders/orders.component';
 
 
 @NgModule({
   declarations: [
     RidermapComponent,
     OrderTestComponent,
+    OrdersComponent,
+    RidersComponent,
   ],
   imports: [
     CommonModule,
@@ -29,6 +35,8 @@ import { RiderOrderService } from './services/rider-order-services';
     DxBoxModule,
     DxButtonModule,
     DxToolbarModule,
+    DxTabPanelModule,
+    DxDataGridModule,
     MapLocationRoutingModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyC0uM0PP4_pTOAWjYvsljWeOC_lRJUVy0A'

@@ -1,0 +1,7 @@
+<dx-list [items]="riders" [height]="400" [showSelectionControls]="false" itemTemplate="listItem">
+    <div *dxTemplate="let item of 'listItem'">
+      <dx-button stylingMode="outlined" text="{{item.objectType}} {{item.rider}}" type="normal" [width]="120"
+        (onClick)="onRiderClick(item)">
+      </dx-button>
+    </div>
+  </dx-list>
